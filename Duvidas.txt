@@ -26,7 +26,7 @@
         [alias]
 	        s = !git status -s 
             c = !git add --all && git commit -m
-            l = !git log
+            l = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
 
         1.9 - Com flag -s o output do comando será mais simplificado e se quisermos com mais detalhes podemos usar sem o alias
                 Ex: git s | git status
@@ -35,5 +35,18 @@
                git commit -m irá criar o commit 
                     Ex: git c "Meu commit"
     
+        1.11 - git l
+                %h - Hash do commit reduzida
+                %d - Branch e se tiver uma tag irá mostrar também
+                %s - Subject mensagem do nosso commit
+                %cn - Nome da pessoa que fez o commit
+                %cr - Data relativa
 
 2 - Configurando as Dependencias do projeto
+
+    Iniciando o projeto
+    2.1 - git init
+    2.2 - yarn init -y
+
+    Criando commits pontuais
+        git c "chore: add yarn" - Chore serve como conveção de commits quando adicionamos um lib no projeto

@@ -1,0 +1,8 @@
+{
+  "name": "node_typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alefwhite/NodeJs-Typescript-TDD-DDD-Clean-Architecture-e-SOLID.git",
+  "author": "alefwhite <alefwhite@hotmail.com>",
+  "license": "MIT"
+}
