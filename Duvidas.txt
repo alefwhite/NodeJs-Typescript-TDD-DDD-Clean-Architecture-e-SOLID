@@ -70,3 +70,23 @@
 
         Criando commits pontuais
             git c "chore: add commit linter"
+
+    Instalando o typescript no projeto
+        yarn add typescript @types/node -D - Após a instalação devemos criar um arquivo tsconfig.json
+    Config do tsconfig
+        {
+            "compilerOptions": {
+                "outDir": "./dist",
+                "module": "commonjs",
+                "target": "ES2019",
+                "esModuleInterop": true,
+                "allowJs": true
+            }
+        }
+
+    Config no .gitignore
+        node_modules
+        dist 
+
+    Criando commits pontuais
+            git c "chore: add commit typescript"
