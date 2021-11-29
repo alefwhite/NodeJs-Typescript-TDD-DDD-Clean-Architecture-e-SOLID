@@ -69,7 +69,7 @@
         yarn add git-commit-msg-linter -D
 
         Criando commits pontuais
-            git c "chore: add commit linter"
+            git c "chore: add msg linter"
 
     Instalando o typescript no projeto
         yarn add typescript @types/node -D - Após a instalação devemos criar um arquivo tsconfig.json
@@ -80,7 +80,8 @@
                 "module": "commonjs",
                 "target": "ES2019",
                 "esModuleInterop": true,
-                "allowJs": true
+                "allowJs": true,
+                "strictNullChecks": true
             }
         }
 
@@ -89,7 +90,7 @@
         dist 
 
     Criando commits pontuais
-            git c "chore: add commit typescript"
+            git c "chore: add typescript"
 
 
     Instalando eslint Javasript Standard Style - Para que o eslint consiga da um suporte correto para o typescript devemos instalar 
@@ -113,7 +114,7 @@
         } 
 
     Criando commits pontuais
-            git c "chore: add commit eslint"
+            git c "chore: add eslint"
 
     Devemos criar um arquivo .eslintignore
         Config 
@@ -124,3 +125,37 @@
             git add .
             git commit --amend --no-edit - Dessa forma ele irá juntar os commits e usar a mesma mensagem utilizada no commit anterior
             
+
+    Instalando o husky yarn add husky -D -> Husky é um pacote npm que “torna os hooks Git fáceis.
+        Ele nos permite criar hooks para o nosso git - Então podemos executar comandos antes de fazer um commit
+        Se você for até a raiz de um projeto inicializado com Git e digitar:
+            ls .git/hooks
+        Você verá uma lista de ganchos de exemplo, como pre-push, pre-rebase, pre-commit e assim por diante. 
+        Esta é uma maneira de escrevermos algum código de plugin para executar alguma lógica antes de realizar a ação do Git.
+        Se quisermos garantir que o código foi devidamente lintado e formatado, antes de alguém criar um commit usando o comando 
+        git commit, poderíamos escrever um hook Git de pre-commit.
+
+    Após a instalação devemos criar um arquivo .huskyrc.json
+    Config
+        {
+            "hooks": {
+                "pre-commit": "lint-staged"
+            }
+        }
+
+    Utilizaremos em conjunto uma biblioteca que irá ajudar o husky quando tiver muitos arquivos para o eslint validar antes
+    do commit não demorar muito pq ele vai fazer com que o husky rode apenas nos arquivos que estejam na staged do git 
+    que no caso seria apenas os arquivos modificados - yarn add lint-staged -D
+
+    Agora devemos criar um arquivo chamado .lintstagedrc.json
+    {
+        "*.ts": [
+            "eslint 'src/**' --fix",
+            "git add"
+        ]
+    }
+
+    Toda esse configura vai nos ajudar a impedir de termos commits defeituosos na aplicação
+        
+        Criando commits pontuais
+            git c "chore: add husky and lint staged"
