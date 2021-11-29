@@ -90,3 +90,37 @@
 
     Criando commits pontuais
             git c "chore: add commit typescript"
+
+
+    Instalando eslint Javasript Standard Style - Para que o eslint consiga da um suporte correto para o typescript devemos instalar 
+    todos os plugins abaixo
+
+    yarn add typescript@^4 eslint@^7.12.1 eslint-plugin-promise@^5.0.0 eslint-plugin-import@^2.22.1 eslint-plugin-node@^11.1.0 
+    @typescript-eslint/eslint-plugin@^4.0.1 eslint-config-standard-with-typescript@latest -D
+
+    Depois da instalação devemos instalar os plugins no vscode
+        Eslint
+
+    Agora iremos setar as configurações do nosso eslint criando um arquivo chamado .eslintrc.json, Agora o plugin instalado anteriormente
+    Irá ler esse arquivo para poder fazer o linter
+
+    Config do .eslintrc.json
+        {
+            "extends": "standard-with-typescript",
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            }
+        } 
+
+    Criando commits pontuais
+            git c "chore: add commit eslint"
+
+    Devemos criar um arquivo .eslintignore
+        Config 
+            node_modules
+            dist
+
+    Criando commits pontuais, como esquecemos de adicionar o eslintignore no commit anterior podemos juntar um commit com o outro
+            git add .
+            git commit --amend --no-edit - Dessa forma ele irá juntar os commits e usar a mesma mensagem utilizada no commit anterior
+            
