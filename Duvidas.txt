@@ -159,3 +159,25 @@
         
         Criando commits pontuais
             git c "chore: add husky and lint staged"
+
+    
+    Instalando o jest que será a biblioteca de teste utilizada no projeto - yarn add jest @types/jest ts-jest -D
+
+    Após instalação devemos executar o comando - npx jest --init
+
+    jest.config.js
+    module.exports = {
+        roots: ['<rootDir>/src'],
+        collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+        coverageDirectory: 'coverage',
+        testEnvironment: 'node',
+        transform: {
+            '.+\\.ts$': 'ts-jest'
+        }
+        // clearMocks: true,
+        // collectCoverage: true,
+        // coverageProvider: 'v8'   
+    }
+
+     Criando commits pontuais
+            git c "chore: add jest"
