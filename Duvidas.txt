@@ -1,0 +1,39 @@
+1 - Configurando o Git
+
+    Criando atalhos para alguns comandos do Git
+        1.1 - git config --list -> Irá listar todas as configurações do git na máquina
+
+    Existem 3 níveis de configuração do git
+        1.2 - git config --system -> Serve para qualquer projeto pois será configurado para a máquina toda 
+        1.3 - git config --global -> Será feita a configuração para o nosso usuário e servirá para qualquer projeto
+        1.4 - git config --local -> Será apenas do projeto espeficicado
+
+    Nesse caso utilizaremos o global que são as configurações do nosso usuário para qualquer projeto
+        1.5 - git config --global --edit -> Comando para editarmos as configurações do git 
+        1.6 - :qa Para sairmos desse modo de configuração
+        1.7 - Como o VI é um pouco complicado de usar podemos utilizar um editor de código - git config --global core.editor code
+        1.8 - Agora se usarmos novamente o comando git config --global --edit ele abrirá no vscode as configurações
+
+    Após se aberto o arquivo de configuração do git com o vs code podemos notar que ele criou automaticamente a seguinte config
+        [core]
+	         editor = code
+    Porém devemos incluir a flag --wait para que o vscode só abra depois de carregar todas as configurações se não usarmos pode 
+    acontecer de abrir em branco.
+        [core]
+            editor = code --wait    
+    
+    Criando nossos atalhos
+        [alias]
+	        s = !git status -s 
+            c = !git add --all && git commit -m
+            l = !git log
+
+        1.9 - Com flag -s o output do comando será mais simplificado e se quisermos com mais detalhes podemos usar sem o alias
+                Ex: git s | git status
+
+        1.10 - git add --all irá adicionar todos os arquivos que foram modificados 
+               git commit -m irá criar o commit 
+                    Ex: git c "Meu commit"
+    
+
+2 - Configurando as Dependencias do projeto
