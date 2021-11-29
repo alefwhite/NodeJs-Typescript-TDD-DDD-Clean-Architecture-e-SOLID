@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:alefwhite/NodeJs-Typescript-TDD-DDD-Clean-Architecture-e-SOLID.git",
   "author": "alefwhite <alefwhite@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.2.8"
+  }
 }

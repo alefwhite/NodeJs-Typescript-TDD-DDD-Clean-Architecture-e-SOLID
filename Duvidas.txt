@@ -49,4 +49,24 @@
     2.2 - yarn init -y
 
     Criando commits pontuais
-        git c "chore: add yarn" - Chore serve como conveção de commits quando adicionamos um lib no projeto
+     type:
+        feat     Adição de funcionalidade.
+        fix      Correção de defeito.
+        docs     Mudança em documentação.
+        style    Mudança de formatação ou estilo, que não afeta a execução do código (espaço, tabulação, etc).
+        refactor Mudança na organização do código, que não afeta o comportamento existente.
+        test     Adição ou mudança de um teste.
+        chore    Adição ou mudança em script de build, que não afeta o código de produção.
+        perf     Mudança de código para melhoria de desempenho.
+        ci       Mudança de configuração de integração contínua.
+        build    Mudança em arquivos de build ou em dependências externas.
+        temp     Commit temporário, que não deve ser incluído no CHANGELOG.
+
+        git c "chore: add yarn" 
+
+    
+    Utilizaremos  um biblioteca que linter de commit para que nossos commits não sejam aceitam se não estiver no padrão
+        yarn add git-commit-msg-linter -D
+
+        Criando commits pontuais
+            git c "chore: add commit linter"
