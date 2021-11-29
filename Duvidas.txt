@@ -179,5 +179,25 @@
         // coverageProvider: 'v8'   
     }
 
-     Criando commits pontuais
+    Criando commits pontuais
             git c "chore: add jest"
+
+    Depois de configuramos o jest devemos incluir uma config no nosso package.json e no lintstagedrc
+    Agora além dele fazer o linter ele vai executar os testes e dessa forma garatimos que não teremos código defeituosos e nem testes
+    falhando
+
+    {
+        "*.ts": [
+            "eslint 'src/**' --fix",
+            "yarn test:staged",
+            "git add"
+        ]
+    }
+
+    "scripts": {
+        "test": "jest",
+        "test:staged": "jest"
+    }
+
+     Criando commits pontuais
+            git c "chore: add jest to lint staged"
