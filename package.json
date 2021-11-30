@@ -24,5 +24,11 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "test:staged": "jest --passWithNoTests"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint 'src/**' --fix",
+      "npm run test:staged"
+    ]
   }
 }
