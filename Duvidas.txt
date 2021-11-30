@@ -152,8 +152,13 @@
     E quando digitar  npm i husky -D já vai instalar a versão 6.x.x. Logo depois para habilitar o Git hooks 
     não precisará mais criar o arquivo .huskyrc.json, bastará apenas digitar no terminal npx husky install , isto criará uma pasta .husky.
 
-    Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar npx husky add .husky/pre-commit "lint-staged".
-
+    Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar 
+        npx husky add .husky/pre-commit "npx lint-staged"
+    
+    Para configurar o lint-staged no husky, eu tive que rodar o comando  npx husky add .husky/pre-commit "npm run lint-staged"
+    Depois, para configurar o git-commit-msg-linter, tive que executar npx husky add .husky/commit-msg '.git/hooks/commit-msg \"$1"' , 
+    mas o arquivo não foi gerado corretamente, então tive que editar o arquivo .husky/commit-msg e incluir o $1 manualmente
+    
     Para quem está utilizando o git-commit-msg-linter para funcionar com husky 6 terá de configurar o commit-msg. 
     Isso também é bem simples basta digitar no terminal o comando npx husky add .husky/commit-msg ".git/hooks/commit-msg \$1"
 
