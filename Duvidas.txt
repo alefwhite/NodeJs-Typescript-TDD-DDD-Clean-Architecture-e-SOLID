@@ -201,3 +201,13 @@
 
      Criando commits pontuais
             git c "chore: add jest to lint staged"
+
+     Criando commits pontuais
+        É recomendado que seja feito o commit da classe de produção primeiro e depois arquivo de teste
+        pq se acontecer de revertemos um commit de uma classe de produção o teste irá dar errado pois 
+        não irá conter o arquivo.
+        Devemos então adicionar separadamente da arquivo e commitar conforme o exemplo abaixo
+            git add src/presentation/controllers/signup.ts
+            git commit -m "feat: ensure SignUpController returns 400 if no name is provided"
+
+            
