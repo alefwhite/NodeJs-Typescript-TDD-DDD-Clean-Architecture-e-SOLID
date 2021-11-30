@@ -162,6 +162,7 @@
     Para quem está utilizando o git-commit-msg-linter para funcionar com husky 6 terá de configurar o commit-msg. 
     Isso também é bem simples basta digitar no terminal o comando npx husky add .husky/commit-msg ".git/hooks/commit-msg \$1"
 
+    git config --global core.autocrlf true / Tive que usar esse comando pois ele bugava o arquivo do .lintstagedrc
 
     Utilizaremos em conjunto uma biblioteca que irá ajudar o husky quando tiver muitos arquivos para o eslint validar antes
     do commit não demorar muito pq ele vai fazer com que o husky rode apenas nos arquivos que estejam na staged do git 
