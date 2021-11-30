@@ -143,6 +143,21 @@
             }
         }
 
+
+    Com o intuito de ajudar a quem possa se interessar o husky já está na versão 6, após várias reclamações de problemas com a versão 5.
+
+    Tenho usado a quase 15 dias e tenho percebido que essa versão está um pouco mais rápida.
+
+    A forma de configurar mudou um pouco, mas continua simples é só seguir a aula 4. Configurando as dependências. 
+    E quando digitar  npm i husky -D já vai instalar a versão 6.x.x. Logo depois para habilitar o Git hooks 
+    não precisará mais criar o arquivo .huskyrc.json, bastará apenas digitar no terminal npx husky install , isto criará uma pasta .husky.
+
+    Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar npx husky add .husky/pre-commit "lint-staged".
+
+    Para quem está utilizando o git-commit-msg-linter para funcionar com husky 6 terá de configurar o commit-msg. 
+    Isso também é bem simples basta digitar no terminal o comando npx husky add .husky/commit-msg ".git/hooks/commit-msg \$1"
+
+
     Utilizaremos em conjunto uma biblioteca que irá ajudar o husky quando tiver muitos arquivos para o eslint validar antes
     do commit não demorar muito pq ele vai fazer com que o husky rode apenas nos arquivos que estejam na staged do git 
     que no caso seria apenas os arquivos modificados - yarn add lint-staged -D
@@ -210,4 +225,3 @@
             git add src/presentation/controllers/signup.ts
             git commit -m "feat: ensure SignUpController returns 400 if no name is provided"
 
-            
