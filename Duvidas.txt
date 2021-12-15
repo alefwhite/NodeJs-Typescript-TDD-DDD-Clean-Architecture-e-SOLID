@@ -149,14 +149,17 @@
     Tenho usado a quase 15 dias e tenho percebido que essa versão está um pouco mais rápida.
 
     A forma de configurar mudou um pouco, mas continua simples é só seguir a aula 4. Configurando as dependências. 
-    E quando digitar  npm i husky -D já vai instalar a versão 6.x.x. Logo depois para habilitar o Git hooks 
-    não precisará mais criar o arquivo .huskyrc.json, bastará apenas digitar no terminal npx husky install , isto criará uma pasta .husky.
+    E quando digitar  npm i husky -D já vai instalar a versão 6.x.x. 
+    Logo depois para habilitar o Git hooks não precisará mais criar o arquivo .huskyrc.json, 
+    bastará apenas digitar no terminal npx husky install , isto criará uma pasta .husky.
 
     Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar 
         npx husky add .husky/pre-commit "npx lint-staged"
     
-    Para configurar o lint-staged no husky, eu tive que rodar o comando  npx husky add .husky/pre-commit "npm run lint-staged"
-    Depois, para configurar o git-commit-msg-linter, tive que executar npx husky add .husky/commit-msg '.git/hooks/commit-msg \"$1"' , 
+    Para configurar o lint-staged no husky, eu tive que rodar o comando  
+        npx husky add .husky/pre-commit "npm run lint-staged"
+    Depois, para configurar o git-commit-msg-linter, 
+        tive que executar npx husky add .husky/commit-msg '.git/hooks/commit-msg \"$1"' , 
     mas o arquivo não foi gerado corretamente, então tive que editar o arquivo .husky/commit-msg e incluir o $1 manualmente
     
     Para quem está utilizando o git-commit-msg-linter para funcionar com husky 6 terá de configurar o commit-msg. 
@@ -189,16 +192,17 @@
     jest.config.js
     module.exports = {
         roots: ['<rootDir>/src'],
-        collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+        collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/main/**', '!<rootDir>/src/**/*-protocols.ts', '!**/protocols/**'],
         coverageDirectory: 'coverage',
+        coverageProvider: 'babel',
         testEnvironment: 'node',
         transform: {
             '.+\\.ts$': 'ts-jest'
         }
         // clearMocks: true,
         // collectCoverage: true,
-        // coverageProvider: 'v8'   
     }
+
 
     Criando commits pontuais
             git c "chore: add jest"
@@ -231,4 +235,29 @@
             git add src/presentation/controllers/signup.ts
             git commit -m "feat: ensure SignUpController returns 400 if no name is provided"
 
+
     
+    Criando scripts de testes no Jest
+
+    "scripts": {
+        // Iremos utilizar constantemente quando estamos desenvolvendo nossos testes e queremos apenas saber se o teste atual passou
+        // ele mostra menos informações no terminal
+        "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+        
+        // Mostra as informações de todos os testes com mais detalhes
+        "test:verbose": "jest --passWithNoTests",
+        
+        // Utilizaremos apenas para executar arquivos com a extensão spec informado nas configurações do arquivo jest-unit-config.js
+        "test:unit": "jest --passWithNoTests --watch -c jest-unit-config.js",
+
+        // Utilizaremos apenas para executar arquivos com a extensão test informado nas configurações do arquivo jest-integration-config.js
+        "test:integration": "jest --passWithNoTests --watch -c jest-integration-config.js",
+
+        "test:staged": "jest --passWithNoTests"
+
+        "test:ci": "yarn test -- --coverage"
+    },
+    
+
+    Configurando pre push
+    npx husky add .husky/pre-push "yarn test:ci"
