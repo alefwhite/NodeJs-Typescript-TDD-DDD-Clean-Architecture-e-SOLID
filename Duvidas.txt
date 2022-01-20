@@ -62,18 +62,27 @@
         build    Mudança em arquivos de build ou em dependências externas.
         temp     Commit temporário, que não deve ser incluído no CHANGELOG.
 
-        git c "chore: add yarn" 
+        git c "chore: add yarn" - Usar sempre um verbo imperativo antes da mensagem 
 
     
-    Utilizaremos  um biblioteca que linter de commit para que nossos commits não sejam aceitam se não estiver no padrão
+    Utilizaremos uma biblioteca de linter de commit para que nossos commits não sejam aceitam se não estiver no padrão
         yarn add git-commit-msg-linter -D
+
+    Agora que adicionamos uma biblioteca temos que criar um arquivo .gitignore
+        Config no .gitignore
+            node_modules
+            dist 
 
         Criando commits pontuais
             git c "chore: add msg linter"
 
     Instalando o typescript no projeto
-        yarn add typescript @types/node -D - Após a instalação devemos criar um arquivo tsconfig.json
-    Config do tsconfig
+        yarn add typescript @types/node -D 
+    
+    @types/node irá adicionar tipagem nos recursos nativos do node
+    
+    Após a instalação devemos criar um arquivo tsconfig.json
+        Config do tsconfig
         {
             "compilerOptions": {
                 "outDir": "./dist",
@@ -83,11 +92,7 @@
                 "allowJs": true,
                 "strictNullChecks": true
             }
-        }
-
-    Config no .gitignore
-        node_modules
-        dist 
+        }    
 
     Criando commits pontuais
             git c "chore: add typescript"
@@ -102,8 +107,8 @@
     Depois da instalação devemos instalar os plugins no vscode
         Eslint
 
-    Agora iremos setar as configurações do nosso eslint criando um arquivo chamado .eslintrc.json, Agora o plugin instalado anteriormente
-    Irá ler esse arquivo para poder fazer o linter
+    Agora iremos setar as configurações do nosso eslint criando um arquivo na raiz do projeto chamado .eslintrc.json, 
+    Agora o plugin instalado anteriormente, Irá ler esse arquivo para poder fazer o linter.
 
     Config do .eslintrc.json
         {
@@ -126,16 +131,18 @@
             git commit --amend --no-edit - Dessa forma ele irá juntar os commits e usar a mesma mensagem utilizada no commit anterior
             
 
-    Instalando o husky yarn add husky -D -> Husky é um pacote npm que “torna os hooks Git fáceis.
-        Ele nos permite criar hooks para o nosso git - Então podemos executar comandos antes de fazer um commit
-        Se você for até a raiz de um projeto inicializado com Git e digitar:
-            ls .git/hooks
-        Você verá uma lista de ganchos de exemplo, como pre-push, pre-rebase, pre-commit e assim por diante. 
-        Esta é uma maneira de escrevermos algum código de plugin para executar alguma lógica antes de realizar a ação do Git.
-        Se quisermos garantir que o código foi devidamente lintado e formatado, antes de alguém criar um commit usando o comando 
-        git commit, poderíamos escrever um hook Git de pre-commit.
+    Instalando o husky yarn add husky -D
+    Husky é um pacote npm que “torna os hooks Git fáceis.
+            Ele nos permite criar hooks para o nosso git - Então podemos executar comandos antes de fazer um commit
+            Se você for até a raiz de um projeto inicializado com Git e digitar:
+                ls .git/hooks
+            Você verá uma lista de ganchos de exemplo, como pre-push, pre-rebase, pre-commit e assim por diante. 
+            Esta é uma maneira de escrevermos algum código de plugin para executar alguma lógica antes de realizar a ação do Git.
+            Se quisermos garantir que o código foi devidamente lintado e formatado, antes de alguém criar um commit usando o comando 
+            git commit, poderíamos escrever um hook Git de pre-commit.
 
-    Após a instalação devemos criar um arquivo .huskyrc.json
+    Após a instalação devemos criar um arquivo .huskyrc.json - No curso ele utiliza uma versão inferior que precisava criar esse arquivo
+    caso não for usar pode pular esse passo.
     Config
         {
             "hooks": {
@@ -145,31 +152,28 @@
 
 
     Com o intuito de ajudar a quem possa se interessar o husky já está na versão 6, após várias reclamações de problemas com a versão 5.
-
-    Tenho usado a quase 15 dias e tenho percebido que essa versão está um pouco mais rápida.
-
     A forma de configurar mudou um pouco, mas continua simples é só seguir a aula 4. Configurando as dependências. 
-    E quando digitar  npm i husky -D já vai instalar a versão 6.x.x. 
+    E quando digitar yarn add husky -D já vai instalar a versão 6.x.x. 
     Logo depois para habilitar o Git hooks não precisará mais criar o arquivo .huskyrc.json, 
-    bastará apenas digitar no terminal npx husky install , isto criará uma pasta .husky.
+    bastará apenas digitar no terminal npx husky install, isto criará uma pasta .husky. na raiz do projeto
 
     Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar 
         npx husky add .husky/pre-commit "npx lint-staged"
     
-    Para configurar o lint-staged no husky, eu tive que rodar o comando  
+    Para configurar o lint-staged no husky, eu tive que rodar o comando
         npx husky add .husky/pre-commit "npm run lint-staged"
+
     Depois, para configurar o git-commit-msg-linter, 
-        tive que executar npx husky add .husky/commit-msg '.git/hooks/commit-msg \"$1"' , 
-    mas o arquivo não foi gerado corretamente, então tive que editar o arquivo .husky/commit-msg e incluir o $1 manualmente
-    
-    Para quem está utilizando o git-commit-msg-linter para funcionar com husky 6 terá de configurar o commit-msg. 
-    Isso também é bem simples basta digitar no terminal o comando npx husky add .husky/commit-msg ".git/hooks/commit-msg \$1"
+        tive que executar npx husky add .husky/commit-msg '.git/hooks/commit-msg \"$1"',
+
+    Mas pode ser que o arquivo não gere corretamente, então tive que editar o arquivo .husky/commit-msg e incluir o $1 manualmente
 
     git config --global core.autocrlf false / Tive que usar esse comando pois ele bugava o arquivo do .lintstagedrc
 
     Utilizaremos em conjunto uma biblioteca que irá ajudar o husky quando tiver muitos arquivos para o eslint validar antes
     do commit não demorar muito pq ele vai fazer com que o husky rode apenas nos arquivos que estejam na staged do git 
-    que no caso seria apenas os arquivos modificados - yarn add lint-staged -D
+    que no caso seria apenas os arquivos modificados.
+        yarn add lint-staged -D
 
     Agora devemos criar um arquivo chamado .lintstagedrc.json
     {
@@ -179,29 +183,39 @@
         ]
     }
 
-    Toda esse configura vai nos ajudar a impedir de termos commits defeituosos na aplicação
+    Toda essa configuração vai nos ajudar a impedir de termos commits defeituosos na aplicação
         
         Criando commits pontuais
             git c "chore: add husky and lint staged"
 
     
-    Instalando o jest que será a biblioteca de teste utilizada no projeto - yarn add jest @types/jest ts-jest -D
+    Instalando o jest que será a biblioteca de teste utilizada no projeto  
+        yarn add jest @types/jest ts-jest -D
 
-    Após instalação devemos executar o comando - npx jest --init
+    Após instalação devemos executar o comando -> npx jest --init
+        1 - yes
+        2 - node
+        3 - yes
+        4 - no
 
     jest.config.js
-    module.exports = {
-        roots: ['<rootDir>/src'],
-        collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/main/**', '!<rootDir>/src/**/*-protocols.ts', '!**/protocols/**'],
-        coverageDirectory: 'coverage',
-        coverageProvider: 'babel',
-        testEnvironment: 'node',
-        transform: {
-            '.+\\.ts$': 'ts-jest'
+        module.exports = {
+            roots: ['<rootDir>/src'],
+            coverageDirectory: 'coverage',
+            collectCoverageFrom: [
+                '<rootDir>/src/**/*.ts', 
+                '!<rootDir>/src/main/**', 
+                '!<rootDir>/src/**/*-protocols.ts', 
+                '!**/protocols/**'
+            ],           
+            coverageProvider: 'babel',
+            testEnvironment: 'node',
+            transform: {
+                '.+\\.ts$': 'ts-jest'
+            }
+            // clearMocks: true,
+            // collectCoverage: true,
         }
-        // clearMocks: true,
-        // collectCoverage: true,
-    }
 
 
     Criando commits pontuais
@@ -224,10 +238,10 @@
         "test:staged": "jest"
     }
 
-     Criando commits pontuais
+    Criando commits pontuais
             git c "chore: add jest to lint staged"
 
-     Criando commits pontuais
+    Criando commits pontuais
         É recomendado que seja feito o commit da classe de produção primeiro e depois arquivo de teste
         pq se acontecer de revertemos um commit de uma classe de produção o teste irá dar errado pois 
         não irá conter o arquivo.
