@@ -98,7 +98,7 @@
             git c "chore: add typescript"
 
 
-    Instalando eslint Javasript Standard Style - Para que o eslint consiga da um suporte correto para o typescript devemos instalar 
+    Instalando eslint Javasript Standard Style - Para que o eslint consiga dar um suporte correto para o typescript devemos instalar 
     todos os plugins abaixo
 
     yarn add typescript@^4 eslint@^7.12.1 eslint-plugin-promise@^5.0.0 eslint-plugin-import@^2.22.1 eslint-plugin-node@^11.1.0 
@@ -115,6 +115,9 @@
             "extends": "standard-with-typescript",
             "parserOptions": {
                 "project": "./tsconfig.json"
+            },
+            "rules": {
+                "@typescript-eslint/strict-boolean-expressions": "off"
             }
         } 
 
@@ -249,7 +252,10 @@
             git add src/presentation/controllers/signup.ts
             git commit -m "feat: ensure SignUpController returns 400 if no name is provided"
 
-
+        Como é recomendado commitar primeiro a classe de produção o jest vai reclamar que não foi feito nenhum teste
+        então devemos incluir no package.json no script test:staged: "jest --passWithNoTests" para que seja aceito fazer o commit
+        sem nenhum teste.
+        Podemos incluir a flah --watch no teste para que ao salvar um teste ele já execute   
     
     Criando scripts de testes no Jest
 
