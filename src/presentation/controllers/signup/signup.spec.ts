@@ -39,13 +39,13 @@ const makeAddAccount = (): AddAccount => {
   return new AddAccountStub()
 }
 
-interface SubTypes {
+interface SutTypes {
   sut: SignUpController
   emailValidatorStub: EmailValidator
   addAccountStub: AddAccount
 }
 
-const makeSut = (): SubTypes => {
+const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
   const addAccountStub = makeAddAccount()
   const sut = new SignUpController(emailValidatorStub, addAccountStub)
@@ -69,7 +69,7 @@ describe('SignUp Controller', () => {
       }
     }
 
-    const httpResponse = await await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('name'))
@@ -126,6 +126,7 @@ describe('SignUp Controller', () => {
 
   test('Should return 400 if password confirmation fails', async () => {
     const { sut } = makeSut()
+
     const httpRequest = {
       body: {
         name: 'any_name',
