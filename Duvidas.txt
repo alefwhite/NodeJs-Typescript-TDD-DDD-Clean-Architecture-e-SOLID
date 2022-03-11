@@ -281,3 +281,7 @@
 
     Configurando pre push
     npx husky add .husky/pre-push "yarn test:ci"
+
+    Instalando a biblioteca do email validator
+        yarn add validator
+        yarn add @types/validator -D

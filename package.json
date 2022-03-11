@@ -8,6 +8,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
+    "@types/validator": "^13.7.1",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "eslint": "^7.12.1",
     "eslint-config-standard-with-typescript": "^21.0.1",
@@ -33,6 +34,9 @@
     "*.ts": [
       "eslint 'src/**' --fix",
       "yarn test:staged"
-    ] 
+    ]
+  },
+  "dependencies": {
+    "validator": "^13.7.0"
   }
 }
