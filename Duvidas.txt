@@ -265,15 +265,15 @@
         "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
         
         // Mostra as informações de todos os testes com mais detalhes
-        "test:verbose": "jest --passWithNoTests",
+        "test:verbose": "jest --passWithNoTests --runInBand",
         
         // Utilizaremos apenas para executar arquivos com a extensão spec informado nas configurações do arquivo jest-unit-config.js
-        "test:unit": "jest --passWithNoTests --watch -c jest-unit-config.js",
+        "test:unit": "yarn test -- --watch -c jest-unit-config.js",
 
         // Utilizaremos apenas para executar arquivos com a extensão test informado nas configurações do arquivo jest-integration-config.js
-        "test:integration": "jest --passWithNoTests --watch -c jest-integration-config.js",
+        "test:integration": "yarn test -- --watch -c jest-integration-config.js",
 
-        "test:staged": "jest --passWithNoTests"
+        "test:staged": "yarn test -- --findRelatedTests"
 
         "test:ci": "yarn test -- --coverage"
     },
