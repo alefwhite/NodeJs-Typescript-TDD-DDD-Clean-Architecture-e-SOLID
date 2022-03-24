@@ -285,3 +285,6 @@
     Instalando a biblioteca do email validator
         yarn add validator
         yarn add @types/validator -D
+
+
+    Iniciando Infra Layer Seção 6
