@@ -117,7 +117,14 @@
                 "project": "./tsconfig.json"
             },
             "rules": {
-                "@typescript-eslint/strict-boolean-expressions": "off"
+                "@typescript-eslint/strict-boolean-expressions": "off",
+                "@typescript-eslint/consistent-type-definitions": "off",
+                "@typescript-eslint/comma-spacing": "off",
+                "@typescript-eslint/return-await": "off",
+                "@typescript-eslint/restrict-template-expressions": "off",
+                "@typescript-eslint/no-misused-promises": "off",
+                "@typescript-eslint/no-namespace": "off",
+                "import/export": "off"
             }
         } 
 
@@ -288,3 +295,32 @@
 
 
     Iniciando Infra Layer Seção 6
+
+    Adicionando o bcrypt
+    yarn add bcrypt
+    yarn add @types/bcrypt -D
+
+    Configurando o MongoDb em memória
+        https://www.npmjs.com/package/@shelf/jest-mongodb
+    
+        yarn add @shelf/jest-mongodb @types/mongodb --dev
+        yarn add mongodb
+
+    1. Adicionar esse preset no jest.config.js
+        module.exports = {
+            preset: '@shelf/jest-mongodb',
+        };
+
+    2. Agora devemos criar um arquivo de configuração do jest para o mongodb jest-mongodb-config.js
+        See mongodb-memory-server
+
+        module.exports = {
+            mongodbMemoryServerOptions: {
+                binary: {
+                version: '4.0.3',
+                skipMD5: true,
+                },
+                autoStart: false,
+                instance: {},
+            },
+        };
