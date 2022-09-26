@@ -4,12 +4,12 @@
         1.1 - git config --list -> Irá listar todas as configurações do git na máquina
 
     Existem 3 níveis de configuração do git
-        1.2 - git config --system -> Serve para qualquer projeto pois será configurado para a máquina toda 
+        1.2 - git config --system -> Serve para qualquer projeto pois será configurado para a máquina toda
         1.3 - git config --global -> Será feita a configuração para o nosso usuário e servirá para qualquer projeto
         1.4 - git config --local -> Será apenas do projeto espeficicado
 
     Nesse caso utilizaremos o global que são as configurações do nosso usuário para qualquer projeto
-        1.5 - git config --global --edit -> Comando para editarmos as configurações do git 
+        1.5 - git config --global --edit -> Comando para editarmos as configurações do git
         1.6 - :qa Para sairmos desse modo de configuração
         1.7 - Como o VI é um pouco complicado de usar podemos utilizar um editor de código - git config --global core.editor code
         1.8 - Agora se usarmos novamente o comando git config --global --edit ele abrirá no vscode as configurações
@@ -17,24 +17,24 @@
     Após se aberto o arquivo de configuração do git com o vs code podemos notar que ele criou automaticamente a seguinte config
         [core]
 	         editor = code
-    Porém devemos incluir a flag --wait para que o vscode só abra depois de carregar todas as configurações se não usarmos pode 
+    Porém devemos incluir a flag --wait para que o vscode só abra depois de carregar todas as configurações se não usarmos pode
     acontecer de abrir em branco.
         [core]
-            editor = code --wait    
-    
+            editor = code --wait
+
     Criando nossos atalhos
         [alias]
-	        s = !git status -s 
+	        s = !git status -s
             c = !git add --all && git commit -m
             l = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
 
         1.9 - Com flag -s o output do comando será mais simplificado e se quisermos com mais detalhes podemos usar sem o alias
                 Ex: git s | git status
 
-        1.10 - git add --all irá adicionar todos os arquivos que foram modificados 
-               git commit -m irá criar o commit 
+        1.10 - git add --all irá adicionar todos os arquivos que foram modificados
+               git commit -m irá criar o commit
                     Ex: git c "Meu commit"
-    
+
         1.11 - git l
                 %h - Hash do commit reduzida
                 %d - Branch e se tiver uma tag irá mostrar também
@@ -62,25 +62,25 @@
         build    Mudança em arquivos de build ou em dependências externas.
         temp     Commit temporário, que não deve ser incluído no CHANGELOG.
 
-        git c "chore: add yarn" - Usar sempre um verbo imperativo antes da mensagem 
+        git c "chore: add yarn" - Usar sempre um verbo imperativo antes da mensagem
 
-    
-    Utilizaremos uma biblioteca de linter de commit para que nossos commits não sejam aceitam se não estiver no padrão
+
+    Utilizaremos uma biblioteca de linter de commit para que nossos commits não sejam aceito se não estiver no padrão
         yarn add git-commit-msg-linter -D
 
     Agora que adicionamos uma biblioteca temos que criar um arquivo .gitignore
         Config no .gitignore
             node_modules
-            dist 
+            dist
 
         Criando commits pontuais
             git c "chore: add msg linter"
 
     Instalando o typescript no projeto
-        yarn add typescript @types/node -D 
-    
+        yarn add typescript @types/node -D
+
     @types/node irá adicionar tipagem nos recursos nativos do node
-    
+
     Após a instalação devemos criar um arquivo tsconfig.json
         Config do tsconfig
         {
@@ -92,22 +92,22 @@
                 "allowJs": true,
                 "strictNullChecks": true
             }
-        }    
+        }
 
     Criando commits pontuais
             git c "chore: add typescript"
 
 
-    Instalando eslint Javasript Standard Style - Para que o eslint consiga dar um suporte correto para o typescript devemos instalar 
+    Instalando eslint Javasript Standard Style - Para que o eslint consiga dar um suporte correto para o typescript devemos instalar
     todos os plugins abaixo
 
-    yarn add typescript@^4 eslint@^7.12.1 eslint-plugin-promise@^5.0.0 eslint-plugin-import@^2.22.1 eslint-plugin-node@^11.1.0 
+    yarn add typescript@^4 eslint@^7.12.1 eslint-plugin-promise@^5.0.0 eslint-plugin-import@^2.22.1 eslint-plugin-node@^11.1.0
     @typescript-eslint/eslint-plugin@^4.0.1 eslint-config-standard-with-typescript@latest -D
 
     Depois da instalação devemos instalar os plugins no vscode
         Eslint
 
-    Agora iremos setar as configurações do nosso eslint criando um arquivo na raiz do projeto chamado .eslintrc.json, 
+    Agora iremos setar as configurações do nosso eslint criando um arquivo na raiz do projeto chamado .eslintrc.json,
     Agora o plugin instalado anteriormente, Irá ler esse arquivo para poder fazer o linter.
 
     Config do .eslintrc.json
@@ -126,29 +126,29 @@
                 "@typescript-eslint/no-namespace": "off",
                 "import/export": "off"
             }
-        } 
+        }
 
     Criando commits pontuais
             git c "chore: add eslint"
 
     Devemos criar um arquivo .eslintignore
-        Config 
+        Config
             node_modules
             dist
 
     Criando commits pontuais, como esquecemos de adicionar o eslintignore no commit anterior podemos juntar um commit com o outro
             git add .
             git commit --amend --no-edit - Dessa forma ele irá juntar os commits e usar a mesma mensagem utilizada no commit anterior
-            
+
 
     Instalando o husky yarn add husky -D
     Husky é um pacote npm que “torna os hooks Git fáceis.
             Ele nos permite criar hooks para o nosso git - Então podemos executar comandos antes de fazer um commit
             Se você for até a raiz de um projeto inicializado com Git e digitar:
                 ls .git/hooks
-            Você verá uma lista de ganchos de exemplo, como pre-push, pre-rebase, pre-commit e assim por diante. 
+            Você verá uma lista de ganchos de exemplo, como pre-push, pre-rebase, pre-commit e assim por diante.
             Esta é uma maneira de escrevermos algum código de plugin para executar alguma lógica antes de realizar a ação do Git.
-            Se quisermos garantir que o código foi devidamente lintado e formatado, antes de alguém criar um commit usando o comando 
+            Se quisermos garantir que o código foi devidamente lintado e formatado, antes de alguém criar um commit usando o comando
             git commit, poderíamos escrever um hook Git de pre-commit.
 
     Após a instalação devemos criar um arquivo .huskyrc.json - No curso ele utiliza uma versão inferior que precisava criar esse arquivo
@@ -162,18 +162,18 @@
 
 
     Com o intuito de ajudar a quem possa se interessar o husky já está na versão 6, após várias reclamações de problemas com a versão 5.
-    A forma de configurar mudou um pouco, mas continua simples é só seguir a aula 4. Configurando as dependências. 
-    E quando digitar yarn add husky -D já vai instalar a versão 6.x.x. 
-    Logo depois para habilitar o Git hooks não precisará mais criar o arquivo .huskyrc.json, 
+    A forma de configurar mudou um pouco, mas continua simples é só seguir a aula 4. Configurando as dependências.
+    E quando digitar yarn add husky -D já vai instalar a versão 6.x.x.
+    Logo depois para habilitar o Git hooks não precisará mais criar o arquivo .huskyrc.json,
     bastará apenas digitar no terminal npx husky install, isto criará uma pasta .husky. na raiz do projeto
 
-    Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar 
+    Para criar o pre-commit igual ao da aula para funcionar com o lint-staged basta digitar
         npx husky add .husky/pre-commit "npx lint-staged"
-    
+
     Para configurar o lint-staged no husky, eu tive que rodar o comando
         npx husky add .husky/pre-commit "npm run lint-staged"
 
-    Depois, para configurar o git-commit-msg-linter, 
+    Depois, para configurar o git-commit-msg-linter,
         tive que executar npx husky add .husky/commit-msg '.git/hooks/commit-msg \"$1"',
 
     Mas pode ser que o arquivo não gere corretamente, então tive que editar o arquivo .husky/commit-msg e incluir o $1 manualmente
@@ -181,7 +181,7 @@
     git config --global core.autocrlf false / Tive que usar esse comando pois ele bugava o arquivo do .lintstagedrc
 
     Utilizaremos em conjunto uma biblioteca que irá ajudar o husky quando tiver muitos arquivos para o eslint validar antes
-    do commit não demorar muito pq ele vai fazer com que o husky rode apenas nos arquivos que estejam na staged do git 
+    do commit não demorar muito pq ele vai fazer com que o husky rode apenas nos arquivos que estejam na staged do git
     que no caso seria apenas os arquivos modificados.
         yarn add lint-staged -D
 
@@ -194,12 +194,12 @@
     }
 
     Toda essa configuração vai nos ajudar a impedir de termos commits defeituosos na aplicação
-        
+
         Criando commits pontuais
             git c "chore: add husky and lint staged"
 
-    
-    Instalando o jest que será a biblioteca de teste utilizada no projeto  
+
+    Instalando o jest que será a biblioteca de teste utilizada no projeto
         yarn add jest @types/jest ts-jest -D
 
     Após instalação devemos executar o comando -> npx jest --init
@@ -213,11 +213,11 @@
             roots: ['<rootDir>/src'],
             coverageDirectory: 'coverage',
             collectCoverageFrom: [
-                '<rootDir>/src/**/*.ts', 
-                '!<rootDir>/src/main/**', 
-                '!<rootDir>/src/**/*-protocols.ts', 
+                '<rootDir>/src/**/*.ts',
+                '!<rootDir>/src/main/**',
+                '!<rootDir>/src/**/*-protocols.ts',
                 '!**/protocols/**'
-            ],           
+            ],
             coverageProvider: 'babel',
             testEnvironment: 'node',
             transform: {
@@ -253,7 +253,7 @@
 
     Criando commits pontuais
         É recomendado que seja feito o commit da classe de produção primeiro e depois arquivo de teste
-        pq se acontecer de revertemos um commit de uma classe de produção o teste irá dar errado pois 
+        pq se acontecer de revertemos um commit de uma classe de produção o teste irá dar errado pois
         não irá conter o arquivo.
         Devemos então adicionar separadamente da arquivo e commitar conforme o exemplo abaixo
             git add src/presentation/controllers/signup.ts
@@ -262,18 +262,18 @@
         Como é recomendado commitar primeiro a classe de produção o jest vai reclamar que não foi feito nenhum teste
         então devemos incluir no package.json no script test:staged: "jest --passWithNoTests" para que seja aceito fazer o commit
         sem nenhum teste.
-        Podemos incluir a flah --watch no teste para que ao salvar um teste ele já execute   
-    
+        Podemos incluir a flah --watch no teste para que ao salvar um teste ele já execute
+
     Criando scripts de testes no Jest
 
     "scripts": {
         // Iremos utilizar constantemente quando estamos desenvolvendo nossos testes e queremos apenas saber se o teste atual passou
         // ele mostra menos informações no terminal
         "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
-        
+
         // Mostra as informações de todos os testes com mais detalhes
         "test:verbose": "jest --passWithNoTests --runInBand",
-        
+
         // Utilizaremos apenas para executar arquivos com a extensão spec informado nas configurações do arquivo jest-unit-config.js
         "test:unit": "yarn test -- --watch -c jest-unit-config.js",
 
@@ -284,7 +284,7 @@
 
         "test:ci": "yarn test -- --coverage"
     },
-    
+
 
     Configurando pre push
     npx husky add .husky/pre-push "yarn test:ci"
@@ -302,7 +302,7 @@
 
     Configurando o MongoDb em memória
         https://www.npmjs.com/package/@shelf/jest-mongodb
-    
+
         yarn add @shelf/jest-mongodb @types/mongodb --dev
         yarn add mongodb
 
