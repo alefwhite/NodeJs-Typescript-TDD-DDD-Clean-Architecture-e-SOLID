@@ -262,7 +262,7 @@
         Como é recomendado commitar primeiro a classe de produção o jest vai reclamar que não foi feito nenhum teste
         então devemos incluir no package.json no script test:staged: "jest --passWithNoTests" para que seja aceito fazer o commit
         sem nenhum teste.
-        Podemos incluir a flah --watch no teste para que ao salvar um teste ele já execute
+        Podemos incluir a flag --watch no teste para que ao salvar um teste ele já execute
 
     Criando scripts de testes no Jest
 
