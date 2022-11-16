@@ -183,6 +183,7 @@ describe('SignUp Controller', () => {
     expect(isValidSpy).toHaveBeenCalledWith('any_email@gmail.com')
   })
 
+  // Forma 1 de tratar um erro utilizando uma factory
   // test('Should return 500 if EmailValidator throws', async () => {
   //   const emailValidatorStub = makeEmailValidatorWithError()
 
@@ -204,6 +205,8 @@ describe('SignUp Controller', () => {
   //   expect(httpResponse.body).toEqual(new ServerError())
   // })
 
+
+  // Forma 2 de tratar um erro utilizando mock
   test('Should return 500 if EmailValidator throws', async () => {
     const { sut, emailValidatorStub } = makeSut()
 
